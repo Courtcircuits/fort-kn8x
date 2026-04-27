@@ -1,0 +1,10 @@
+apiVersion: "cilium.io/v2"
+kind: CiliumNetworkPolicy
+metadata:
+  name: block-metadata-server
+  namespace: default
+spec:
+  endpointSelector: {}
+  egressDeny:
+    - toCIDRSet:
+        - cidr: 169.254.169.254/32
