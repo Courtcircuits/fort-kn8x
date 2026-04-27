@@ -5,7 +5,7 @@ metadata:
   namespace: hello-world
 spec:
   hard:
-    pods: "4"                        # Max number of pods
+    pods: "5"                        # Max number of pods
     requests.cpu: "4"                 # Total CPU requests
     requests.memory: 8Gi              # Total memory requests
     limits.cpu: "8"                   # Total CPU limits

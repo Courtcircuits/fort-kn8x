@@ -1,0 +1,24 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-nodeport-values
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: allow-only-specific-nodeports
+    match:
+      resources:
+        kinds:
+        - Service
+    validate:
+      message: "NodePort must be either 31000 or 31001"
+      foreach:
+      - list: "request.object.spec.ports[]"
+        deny:
+          conditions:
+            all:
+            - key: "{{ element.nodePort }}"
+              operator: AnyNotIn
+              value:
+              - 31000
+              - 31001
